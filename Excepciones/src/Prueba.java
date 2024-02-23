@@ -1,20 +1,14 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Prueba {
 
 	public static void main(String[] args) throws AdrianExcepcion {
 
-		System.out.println(conversion());
+		int numero = 123456;
+		System.out.println(factorial(numero));
 	}
 
-	public static double division() throws AdrianExcepcion {
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Dime el primer número.");
-		int num1 = sc.nextInt();
-		System.out.println("Dime el segundo número.");
-		int num2 = sc.nextInt();
+	public static double division(int num1, int num2) throws AdrianExcepcion {
 
 		double division = 0;
 
@@ -74,17 +68,64 @@ public class Prueba {
 		}
 
 	}
-
-	public static String split() {
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Dime una cadena de texto");
-		String cadena = sc.nextLine();
-		
-		System.out.println("Dime el delimitador de la cadena");
-		String delimitador = sc.nextLine();
-		
+	
+	public static String[] split (String cadena, char deli) throws AdrianExcepcion {
+		 
+		int contador=0;
+ 
+		for (int i = 0; i < cadena.length(); i++) {		
+ 
+			if (cadena.charAt(i) == deli) {
+				contador++;
+			}
+ 
+		}
+ 
+		if(contador == 0) {
+			throw new AdrianExcepcion("no esta el limitador");
+		}
+ 
+ 
+		String [] array = new String [contador+1];
+		int posicion=0;
+		StringBuffer sr = new StringBuffer();
+		for (int i = 0; i < cadena.length(); i++) {
+			if(cadena.charAt(i)==deli){
+				array[posicion]=sr.toString();
+				sr = new StringBuffer();
+				posicion++;		
+			}else if(i==cadena.length()-1) {
+				sr.append(cadena.charAt(i));
+				array[posicion]=sr.toString();
+				
+			}else {
+				sr.append(cadena.charAt(i));
+			}
+		}
+ 
+		return array;
+ 
 	}
+
+	public static int factorial(int num) throws AdrianExcepcion {
+		
+		if(num < 0) {
+			throw new AdrianExcepcion("El número no puede ser negativo");
+		}
+		
+		int resultado = 1;
+		for(int i = 1; i <= num; i++) {
+			resultado *= i;
+		}
+		
+		if(resultado > 99999) {
+			throw new AdrianExcepcion("El número no puede superar las 5 cifras");
+		}
+		
+		return resultado;
+	}
+	
+	
 	
 	
 
